@@ -18,7 +18,7 @@ Role Variables
 
 See [defaults/main.yml](defaults/main.yml).
 
-Lists `telegraf_cvmfs_check_servers.hosts` and `telegraf_cvmfs_check_servers.repos` are required.
+Lists `telegraf_cvmfs_check_servers.hosts` and `telegraf_cvmfs_check_servers.repos` or `telegraf_cvmfs_check_servers.combined` are required if you want the role to do anything.
 
 Dependencies
 ------------
@@ -37,6 +37,10 @@ Example Playbook
       repos:
         - repo1.example.org
         - repo2.example.org
+      combined:
+        - host: cvmfs0.example.org
+          repos:
+            - repo1.example.org
   roles:
     - galaxyproject.telegraf_cvmfs
     - dj-wasabi.telegraf

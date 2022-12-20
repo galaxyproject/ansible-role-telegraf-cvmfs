@@ -7,6 +7,10 @@
 #   repos:
 #     - repo1.example.org
 #     - repo2.example.org
+#   combined:
+#     - host: cvmfs0.example.org
+#       repos:
+#         - repo1.example.org
 
 # where/how the check_cvmfs_repos script will be installed
 telegraf_cvmfs_script_dir: /usr/local/bin

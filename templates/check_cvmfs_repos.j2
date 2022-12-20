@@ -19,8 +19,13 @@ check_repo() {
 	fi
 }
 
-{% for host in telegraf_cvmfs_check_servers.hosts %}
-{% for repo in telegraf_cvmfs_check_servers.repos %}
+{% for host in telegraf_cvmfs_check_servers.hosts | default([]) %}
+{% for repo in telegraf_cvmfs_check_servers.repos | default([]) %}
 check_repo {{ host }} {{ repo }}
+{% endfor %}
+{% endfor %}
+{% for entry in telegraf_cvmfs_check_servers.combined | default([]) %}
+{% for repo in entry.repos | default([]) %}
+check_repo {{ entry.host }} {{ repo }}
 {% endfor %}
 {% endfor %}
