@@ -19,8 +19,8 @@ check_repo() {
 	fi
 }
 
-{% for host in cvmfs_check_servers.hosts %}
-{% for repo in cvmfs_check_servers.repos %}
+{% for host in telegraf_cvmfs_check_servers.hosts %}
+{% for repo in telegraf_cvmfs_check_servers.repos %}
 check_repo {{ host }} {{ repo }}
 {% endfor %}
 {% endfor %}

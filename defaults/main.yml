@@ -1,0 +1,20 @@
+---
+
+# hosts and repos to check
+# telegraf_cvmfs_check_servers:
+#   hosts:
+#     - cvmfs1.example.org
+#   repos:
+#     - repo1.example.org
+#     - repo2.example.org
+
+# where/how the check_cvmfs_repos script will be installed
+telegraf_cvmfs_script_dir: /usr/local/bin
+telegraf_cvmfs_script_owner: root
+telegraf_cvmfs_script_group: root
+
+# standard telegraf plugin timeout option
+telegraf_cvmfs_timeout: "2m"
+
+# standard telegraf plugin interval option
+telegraf_cvmfs_interval: "5m"

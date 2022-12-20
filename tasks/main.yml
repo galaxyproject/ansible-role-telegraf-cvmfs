@@ -1,27 +1,30 @@
 ---
+
 - name: Ensure curl is installed
-  package:
+  ansible.builtin.package:
     name: curl
     state: present
 
 - name: Deploy CVMFS data processor
-  template:
-    src: main.sh
-    dest: /usr/bin/check_cvmfs_repos
-    owner: root
-    group: root
+  ansible.builtin.template:
+    src: check_cvmfs_repos.j2
+    dest: "{{ telegraf_cvmfs_script_dir }}/check_cvmfs_repos"
+    owner: "{{ telegraf_cvmfs_script_owner }}"
+    group: "{{ telegraf_cvmfs_script_group }}"
     mode: 0755
   notify: 'Restart Telegraf'
 
-- set_fact:
+- name: Set check_cvmfs_telegraf plugin config fact
+  ansible.builtin.set_fact:
     check_cvmfs_telegraf:
       check_cvmfs_telegraf:
         plugin: exec
         config:
-          - commands = ["/usr/bin/check_cvmfs_repos"]
-          - timeout = "2m"
+          - commands = ["{{ telegraf_cvmfs_script_dir }}/check_cvmfs_repos"]
+          - timeout = "{{ telegraf_cvmfs_timeout }}"
           - data_format = "influx"
-          - interval = "5m"
+          - interval = "{{ telegraf_cvmfs_interval }}"
 
-- set_fact:
-    telegraf_plugins_extra: "{{ telegraf_plugins_extra | combine(check_cvmfs_telegraf) }}"
+- name: Merge check_cvmfs_telegraf with telegraf_plugins_extra
+  ansible.builtin.set_fact:
+    telegraf_plugins_extra: "{{ (telegraf_plugins_extra | default({})) | combine(check_cvmfs_telegraf) }}"

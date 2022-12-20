@@ -1,0 +1,28 @@
+galaxy_info:
+  namespace: galaxyproject
+  role_name: telegraf_cvmfs
+  author: The Galaxy Project
+  company: The Galaxy Project
+  description: "Configure PostgreSQL objects: users (roles), databases, and privileges"
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Amazon
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - telegraf
+    - cvmfs
+dependencies: []
